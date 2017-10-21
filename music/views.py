@@ -1,8 +1,14 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Album
 
 
 def index(request):
-    return HttpResponse("<h1>This is the music app homepage</h1>")
+    all_albums = Album.objects.all()
+
+    context = {'all_albums': all_albums}
+
+    return render(request, 'music/index.html', context)
 
 
 def detail(request, album_id):
